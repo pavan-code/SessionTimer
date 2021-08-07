@@ -1,0 +1,67 @@
+<style>
+    .container {
+    position: relative;
+    max-width: 750px;
+    height:40vh;
+    margin: 30px auto;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  h2 {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 450;
+      color: green;
+  }
+  h1 {
+      text-align: center;
+  }
+
+  .spinner {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode=indeterminate] {    
+    margin: 0 auto;
+  }
+  button {
+      flex: 1 1 auto;
+      margin: 0 auto;
+      background-color: green;
+      color: white;
+  }
+</style>
+
+<div class="container">
+  <h2>File Upload UI in Angular App</h2>
+  <div *ngIf="show" class="spinner">
+    <mat-spinner strokeWidth="2" diameter="110"></mat-spinner> <br />
+    <div>
+      <h3>
+        Uploading Document.. <br />
+        {{ text }}
+      </h3>
+    </div>
+  </div>
+  <div style="text-align: center" *ngIf="!show && !final">
+    <ngx-dropzone (change)="onSelect($event)" [accept]="'.pdf'">
+      <ngx-dropzone-label>Drag and drop your files here</ngx-dropzone-label>
+      <ngx-dropzone-preview
+        *ngFor="let f of files"
+        [removable]="true"
+        (removed)="onRemove(f)"
+      >
+        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+    <br />
+    <button mat-raised-button (click)="upload()" [disabled]="files.length == 0">
+      Upload file
+    </button>
+  </div>
+  <div *ngIf = "final">
+      <h1>File uploaded Successfully.</h1>
+  </div>
+</div>

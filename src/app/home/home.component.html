@@ -1,0 +1,7 @@
+<div class="timer" *ngIf = "!message">
+    Session Expires in :
+    {{minutes}} min : {{sec}} sec
+</div>
+<div *ngIf = "message" class="message">
+    {{message}}
+</div>
